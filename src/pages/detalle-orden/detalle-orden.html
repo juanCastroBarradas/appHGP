@@ -1,0 +1,89 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<ion-title></ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-card style="border-radius: 10px 10px 0 0; padding-bottom: 10px; background-color: #f3f3ff;">
+      <ion-card-title style="border-radius: 10px 10px 0 0; background-color: green;" text-center><h1>Orden de servicio</h1></ion-card-title>
+      <ion-card-content>
+        <ion-card-title>
+          <ion-row style="border-bottom: 1px solid black;">
+            <ion-col col-auto>
+              <label>FOLIO:</label>
+            </ion-col>
+            <ion-col>
+              <label>{{ selectedItem.nidorden }}</label>
+            </ion-col>
+          </ion-row>
+        </ion-card-title>
+        <ion-row>
+          <ion-col col-auto>
+            <label>AREA:</label>
+          </ion-col>
+          <ion-col>
+            <ion-badge item-end>{{ selectedItem.carea }}</ion-badge>
+          </ion-col>
+        </ion-row>
+        <br>
+        <ion-row>
+          <ion-col col-12 text-center style="background-color:  #f32c2c; border-radius: 8px 8px 0 0;">
+            <h1 style="color: white !important;">FALLA</h1>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="background-color:  #c3cdde; border-radius: 0 0 8px 8px; padding: 10px 15px;">
+            <p text-wrap>{{ selectedItem.cfalla }}</p>
+          </ion-col>
+        </ion-row>
+        <br>
+        <ion-row>
+          <ion-col col-auto>
+            <label>ESTATUS:</label>
+          </ion-col>
+          <ion-col>
+            <ion-badge style="background-color:  #43b343;">{{ selectedItem.cestatus }}</ion-badge>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-auto>
+            <label>DEPOSITO: </label>
+          </ion-col>
+          <ion-col>
+            <p text-wrap>{{ selectedItem.cdeposito }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-auto>
+            <label>REPORTO: </label>
+          </ion-col>
+          <ion-col>
+            <ion-badge style="background-color:  #43b343;">{{ selectedItem.creporto }}</ion-badge>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+
+      <ion-item>
+        <ion-row>
+          <ion-col col-auto>
+            <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
+            <label>FECHA REPORTE:</label>
+          </ion-col>
+          <ion-col>
+            <ion-badge item-end>{{ selectedItem.dhoraini }}</ion-badge>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+
+    </ion-card>
+
+    <ion-fab right bottom>
+      <button ion-fab color="vibrant"><ion-icon name="add"></ion-icon></button>
+      <ion-fab-list side="top">
+        <button ion-fab (click)="presentPopover($event)"><ion-icon ios="ios-send" md="md-send"></ion-icon></button>
+        <button ion-fab (click)="popoverEventosShow($event)"><ion-icon ios="ios-chatboxes" md="md-chatboxes"></ion-icon></button>
+      </ion-fab-list>
+    </ion-fab>
+
+</ion-content>

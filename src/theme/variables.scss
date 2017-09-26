@@ -45,15 +45,22 @@ $colors: (
 // App iOS Variables
 // --------------------------------------------------
 // iOS only Sass variables can go here
-
+$popover-ios-width: 90%;
+$popover-ios-min-height: 80%;
+$popover-ios-max-height: 80%;
 
 
 
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
+$popover-md-width: 90%;
+$popover-md-min-height: 80%;
+$popover-md-max-height: 80%;
+$popover-md-border-radius: 7px;
 
-
+$popover-md-box-shadow-color: rgba(0, 0, 0, 0.51) !important;
+//$popover-md-box-shadow: rgba(0, 0, 0, 0.51) !default;
 
 
 // App Windows Variables

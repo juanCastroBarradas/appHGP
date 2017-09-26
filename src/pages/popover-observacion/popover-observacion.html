@@ -1,0 +1,53 @@
+<ion-header>
+
+	<ion-toolbar>
+		<ion-title>CAPTURAR OBSERVACION</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only color="royal" (click)="close();">
+				<ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-toolbar>
+
+</ion-header>
+
+<ion-list class="popover-page">
+	<!--<ion-row>
+		<ion-col text-center>
+    		<label>CAPTURAR OBSERVACION</label>
+        </ion-col>
+	</ion-row>-->
+	<br>
+	<ion-row>
+		<ion-col>
+    		<label>ATENDIO:</label>
+        </ion-col>
+	</ion-row>
+	<ion-row style="border-bottom: 1px solid black;">
+		<ion-col>
+    		<ion-badge>{{ ctecnico }}</ion-badge>
+        </ion-col>
+	</ion-row>
+	<br>
+	<ion-row>
+		<ion-col>
+    		<label>OBSERVACIÓN:</label>
+        </ion-col>
+	</ion-row>
+	<ion-row>
+		<ion-textarea class="text-area-popover" placeholder="Observacion" [(ngModel)]="observacion"></ion-textarea>
+	</ion-row>
+	<ion-row>
+		<p style="color: red;" *ngIf="active">El campo observacion no puede estar vacio</p>
+	</ion-row>
+	<br>
+	<ion-row>
+		<button ion-button block (click)="registraObservacion('PROCESO');" style="background-color: green;" *ngIf="estatusOrden == 'PENDIENTE'"><ion-icon ios="ios-person" md="md-person"> Atiende</ion-icon></button>
+	</ion-row>
+	<ion-row>
+		<button ion-button block (click)="registraObservacion('TRAMITE');" style="background-color: orange;" *ngIf="estatusOrden != 'PENDIENTE'"><ion-icon ios="ios-person" md="md-person"> TRAMITE</ion-icon></button>
+	</ion-row>
+	<ion-row>
+		<button ion-button block (click)="registraObservacion('CERRADO');" style="background-color: red;"><ion-icon ios="ios-close-circle" md="md-close-circle"> CERRAR</ion-icon></button>
+	</ion-row>
+</ion-list>

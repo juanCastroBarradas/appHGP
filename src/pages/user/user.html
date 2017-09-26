@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Cuenta</ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text>Cerrar</span> 
+        <!--<ion-icon name="md-close" showWhen="android, windows"></ion-icon>-->
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+
+	<ion-grid>
+		<ion-row>
+			<ion-col></ion-col>
+			<ion-col col-auto>
+				<div class="splash-logo"></div>		    
+			</ion-col>
+			<ion-col></ion-col>
+		</ion-row>
+		<br>
+		<ion-row>
+			<ion-col col-12 text-center>
+				<div class="splash-intro">Datos Usuario</div>
+			</ion-col>
+		</ion-row>
+		<ion-row>
+			<ion-col col-12>
+				<div style="border: 1px solid black; border-radius: 10px; padding: 15px 25px; background-color: rgba(173, 28, 28, 0.06);">
+					<ion-row>
+						<ion-col col-auto>
+							<ion-icon ios="ios-contact" md="md-contact"></ion-icon>
+						</ion-col>
+						<ion-col>
+							{{ nameUser }}
+						</ion-col>
+					</ion-row>						
+					<ion-row>
+						<ion-col col-auto>
+							<ion-icon ios="ios-mail" md="md-mail"></ion-icon>
+						</ion-col>
+						<ion-col>
+							{{ emailUser }}
+						</ion-col>
+					</ion-row>				
+				</div>
+			</ion-col>			
+		</ion-row>
+		<ion-row>
+			<ion-col col-12 text-center>
+				<button ion-button color="danger" round (click)="doLogoutUser()">Cerrar Sesion</button>
+			</ion-col>
+			
+		</ion-row>
+
+	</ion-grid>
+
+
+
+
+</ion-content>

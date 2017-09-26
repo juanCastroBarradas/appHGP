@@ -1,0 +1,14 @@
+page-popover-observacion {
+	textarea{
+		height: 80% !important;
+	}
+
+	.text-area-popover{
+		height: 100px; resize: both; 
+		border: 1px solid rgba(0, 0, 0, 0.28);
+    	border-radius: 3px;
+	}
+	.popover-page{
+		padding: 20% 2%;
+	}
+}

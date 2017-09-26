@@ -1,0 +1,78 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>EVENTOS</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only color="royal" (click)="close();">
+				<ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
+			</button>
+		</ion-buttons>
+	</ion-navbar> 
+</ion-header>
+<br>
+
+
+<ion-list class="popover-page" no-lines>
+
+    	<ion-item *ngFor="let evento of eventos">
+    		<ion-card>
+    			<ion-card-content style="padding: 0 !important;" *ngIf="evento.nidevent != -1">
+		    		<ion-grid class="gridOrdenes">
+						<ion-row style="border-bottom: 1px solid black;">
+							<ion-col col-auto>
+								<label>ID EVENTO:</label>
+							</ion-col>
+							<ion-col>
+								<label>{{ evento.nidevent }}</label>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col col-auto>
+								<ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
+							</ion-col>
+							<ion-col>
+								<p>{{ evento.dhora }}</p>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col col-auto>
+								<label>ESTATUS:</label>
+							</ion-col>
+							<ion-col>
+								<ion-badge style="background-color:  #43b343;">{{ evento.cestatus }}</ion-badge>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col col-auto>
+								<ion-icon ios="ios-contact" md="md-contact"></ion-icon>
+							</ion-col>
+							<ion-col>
+								<p>{{ evento.ctecnico }}</p>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<label>Observacion:</label>
+							</ion-col>
+						</ion-row>
+						<ion-row>
+							<ion-col>
+								<p text-wrap style="border-radius: 5px; color: white; background-color: rgb(166, 47, 167); padding: 3%;">{{ evento.cobserva }}</p>
+							</ion-col>
+						</ion-row>
+
+		    		</ion-grid>
+	    		</ion-card-content>
+
+	    		<ion-card-content style="padding: 0 !important;" *ngIf="evento.nidevent == -1">
+    				<ion-row>
+						<ion-col>
+							<p text-wrap>{{ evento.cobserva }}</p>
+						</ion-col>
+					</ion-row>
+    			</ion-card-content>
+
+
+
+    		</ion-card>
+    	</ion-item>
+  </ion-list>
