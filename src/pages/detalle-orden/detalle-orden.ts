@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, PopoverController, LoadingController, ViewController } from 'ionic-angular';
 import { PopoverObservacionPage } from '../popover-observacion/popover-observacion';
 import { PopoverEventosPage } from '../popover-eventos/popover-eventos';
-import { HomePage } from '../home/home';
 import { ApiProvider } from '../../providers/api/api';
 
 @Component({
