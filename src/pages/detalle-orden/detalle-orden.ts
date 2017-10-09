@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, PopoverController, LoadingController } from 'ionic-angular';
+import { NavController, NavParams, PopoverController, LoadingController, ViewController } from 'ionic-angular';
 import { PopoverObservacionPage } from '../popover-observacion/popover-observacion';
 import { PopoverEventosPage } from '../popover-eventos/popover-eventos';
+import { HomePage } from '../home/home';
 import { ApiProvider } from '../../providers/api/api';
 
 @Component({
@@ -12,7 +13,7 @@ export class DetalleOrdenPage {
 	selectedItem: any;
 	loading : any;
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, 
+	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
 				public popoverCtrl: PopoverController, public loadingCtrl: LoadingController, public api : ApiProvider) {
 		this.selectedItem = navParams.get('item');
 	}
@@ -40,6 +41,8 @@ export class DetalleOrdenPage {
 		});
 		popover.onDidDismiss((popoverData) => {
 			this.selectedItem.cestatus = popoverData;
+			//this.dismiss();
+			//this.navCtrl.setRoot(HomePage);
 		});
 	}
 
@@ -62,6 +65,10 @@ export class DetalleOrdenPage {
 			error =>{
 				console.log(error);
 			});
+	}
+
+	dismiss() {
+    	this.viewCtrl.dismiss();
 	}
 
 }

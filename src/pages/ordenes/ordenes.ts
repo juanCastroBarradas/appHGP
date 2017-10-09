@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ToastController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController, ModalController, ViewController } from 'ionic-angular';
 import { DetalleOrdenPage } from '../detalle-orden/detalle-orden';
 import { UserPage } from '../user/user';
 import { ApiProvider } from '../../providers/api/api';
@@ -9,20 +9,25 @@ import { ApiProvider } from '../../providers/api/api';
   templateUrl: 'ordenes.html',
 })
 export class OrdenesPage {
-	ordenes : any[];
+	filtro : any;
+	pendientes : any[];
+	tramite : any[];
+	proceso : any[];
+	cerrado : any[];
+	dislpayTramite: boolean;
+	dislpayCerrado: boolean;
+	dislpayPendiente: boolean;
+	dislpayProceso: boolean;
+	
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController,
+	constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public viewCtrl: ViewController,
 				public loadingCtrl: LoadingController, public toastCtrl: ToastController, public api : ApiProvider) {
+		this.filtro = navParams.get('filtro');
+		console.log(this.filtro);
 		this.cargaDatos();
+		this.dislpayCerrado = this.dislpayPendiente = this.dislpayProceso = this.dislpayProceso = false;
 	}
 
-	ngOnInit(){
-		
-  	}
-
-  	ionViewDidLoad() {
-  		console.log('ionViewDidLoad HomePage');
-	}
 
 	modalUserShow() {
 		let contactModal = this.modalCtrl.create(UserPage);
@@ -43,10 +48,22 @@ export class OrdenesPage {
 		/*empleamos el uso del provider Api para realizar la peticiones http
 		este metodo nos retornara una conexion http con respuesta de la ruta especificada*/
 		//let seq = this.api.get('ordenes/consultar/all');
-		let seq = this.api.get('ordenes/consultar/all');
+		let seq = this.api.get('ordenes/consultar/all/filtro/'+this.filtro);
 		seq.map(res => res.json())
 		    	.subscribe(data => {
-		      		this.ordenes = data.arrReults;
+		    		console.log(data);
+		      		this.pendientes = data.arrReults.pendiente;
+		      		this.dislpayPendiente = (data.arrReults.pendiente.length > 0)? true : false;
+
+		      		this.tramite = data.arrReults.tramite;
+		      		this.dislpayTramite = (data.arrReults.tramite.length > 0)? true : false;
+
+		      		this.proceso = data.arrReults.proceso;
+		      		this.dislpayProceso = (data.arrReults.proceso.length > 0)? true : false;
+
+		      		this.cerrado = data.arrReults.cerrado;
+		      		this.dislpayCerrado = (data.arrReults.cerrado.length > 0)? true : false;
+
 		      		loading.dismiss();
 		    	},err => {
 		        	console.error('ERROR', err);
@@ -66,19 +83,8 @@ export class OrdenesPage {
 		});
 	}
 
-
-	filterItems(ev) {
-		// set val to the value of the ev target
-    	var val = ev.target.value;
-
-		if (val && val.trim() !== '') {
-			//this.usuarios = this.usuarios.filter(function(usuario) {
-				//console.log(usuario);
-				//return item.toLowerCase().includes(val.toLowerCase());
-			//});
-		}else{
-			//this.usuarios = this.usuariosFilter;
-		}
+	dismiss() {
+    	this.viewCtrl.dismiss();
 	}
 
 }

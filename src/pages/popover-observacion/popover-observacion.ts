@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController, ViewController } from 'ionic-angular';
 import { ApiProvider } from '../../providers/api/api';
 import { Storage } from '@ionic/storage';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 @Component({
   selector: 'page-popover-observacion',
@@ -16,7 +17,8 @@ export class PopoverObservacionPage {
 	active : boolean;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController, 
-				public toastCtrl: ToastController, public viewCtrl: ViewController, public api : ApiProvider, public storage: Storage) {
+				public toastCtrl: ToastController, public viewCtrl: ViewController, public api : ApiProvider, public storage: Storage, 
+				public barcodeScanner: BarcodeScanner) {
 	}
 
 	ionViewDidLoad() {
@@ -40,44 +42,52 @@ export class PopoverObservacionPage {
 			this.active = true;
 		}else{
 			this.active = false;
-			let loading = this.loadingCtrl.create({
-				spinner: 'bubbles',
-				content: 'Gurdando Observacion.'
-			});
 
-			loading.present();
+			this.barcodeScanner.scan().then((barcodeData)=>{
+				let text = "success!! \ntexto: "+barcodeData.text+"\n"+
+										"formato: "+barcodeData.format;
+				alert(text);
 
-			let seq = this.api.post('ordenes/detalle/'+this.nidOrden+'/capturar', {observacion : this.observacion, nidtecnico : this.nidtecnico, ctecnico : this.ctecnico, ccstatus : cstatus});
-
-			seq.map(res => res.json())
-				.subscribe(data =>{
-					loading.dismiss();
-
-					let toast = this.toastCtrl.create({
-						message: data.arrReults,
-						duration: 3000,
-						 position: 'bottom'
-					});
-					toast.present();
-					this.estatusOrden = cstatus;
-
-				},
-				error =>{
-					loading.dismiss();
-					console.log(error);
-					let toast = this.toastCtrl.create({
-						message: 'Servidor inaccesible',
-						duration: 3000
-					});
-					toast.present();
+				let loading = this.loadingCtrl.create({
+					spinner: 'bubbles',
+					content: 'Gurdando Observacion.'
 				});
-			this.observacion='';
+				loading.present();
+
+				let seq = this.api.post('ordenes/detalle/'+this.nidOrden+'/capturar', {observacion : this.observacion, nidtecnico : this.nidtecnico, ctecnico : this.ctecnico, ccstatus : cstatus});
+				seq.map(res => res.json())
+					.subscribe(data =>{
+						loading.dismiss();
+
+						let toast = this.toastCtrl.create({
+							message: data.arrReults,
+							duration: 3000,
+							 position: 'bottom'
+						});
+						toast.present();
+						this.close();
+						this.estatusOrden = cstatus;
+					},
+					error =>{
+						loading.dismiss();
+						console.log(error);
+						let toast = this.toastCtrl.create({
+							message: 'Servidor inaccesible',
+							duration: 3000
+						});
+						toast.present();
+					});
+				this.observacion='';
+
+			},(err)=>{
+				alert("¡Lector QR no accesible!");
+			});
 		}
 
 	}
 
 	close() {
-	this.viewCtrl.dismiss(this.estatusOrden);
+		this.viewCtrl.dismiss(this.estatusOrden);
 	}
 
 }

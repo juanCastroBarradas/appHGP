@@ -1,42 +1,37 @@
 
 <ion-header>
   <ion-toolbar color="primary">
-    <!--<button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+    <ion-title></ion-title>
     <ion-buttons start>
-      <button ion-button icon-only color="royal">
-        <ion-icon name="search"></ion-icon>
-      </button>
-    </ion-buttons> -->
-    <ion-title>Ordenes de servicio</ion-title>
-    <ion-buttons end>
-      <button ion-button icon-only color="royal" (click)="modalUserShow()">
-        <ion-icon ios="ios-contact" md="md-contact"></ion-icon>
+      <button ion-button (click)="dismiss()">
+        <span ion-text>Cerrar</span> 
+        <!--<ion-icon name="md-close" showWhen="android, windows"></ion-icon>-->
       </button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-
-
-
-<ion-content>
+<ion-content style="background-color: #abffff;">
   <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
-      pullingIcon="arrow-dropdown"
-      pullingText=""
-      refreshingSpinner="circles"
-      refreshingText="">
-    </ion-refresher-content>
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="" refreshingSpinner="circles" refreshingText=""></ion-refresher-content>
   </ion-refresher>
   <!--<ion-searchbar placeholder="Filter Items with Cancel" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>-->
   
-  <ion-list no-lines>
-    
-    <ion-item *ngFor="let orden of ordenes" style="background-color: #abffff;">
+  <div style="margin: 1% 5%; padding: 5px; border-radius: 8px; background-color: white;">
+          <ion-row>
+            <ion-col col-auto>
+              <label>Resultados de:</label>
+            </ion-col>
+            <ion-col text-wrap class="text-row">
+              <ion-badge text-wrap>{{ filtro }}</ion-badge>
+            </ion-col>
+          </ion-row>
+        </div>
 
-      <ion-card (click)="itemTapped($event, orden)">
+  <ion-list no-lines style="margin: 0px !important;">
+    <ion-item *ngIf="dislpayPendiente">PENDIENTE</ion-item>
+    <div *ngFor="let orden of pendientes" style="background-color: #abffff; padding: 8px 6%;">
+      <ion-card (click)="itemTapped($event, orden)" style="padding-left: 2%; padding-right: 2%;">
         <ion-card-content style="padding: 0 !important;" >
           <ion-card-title>
             <ion-row style="border-bottom: 1px solid black;">
@@ -55,20 +50,16 @@
               <ion-icon ios="ios-build" md="md-build"></ion-icon>
               <label>FALLA:</label>
             </ion-col>
-            <ion-col>
-              <p text-wrap>{{ orden.cfalla }}</p>
+            <ion-col text-wrap class="text-row">
+              {{ orden.cfalla }}
             </ion-col>
           </ion-row>
         </ion-card-content>
         <ion-item>
           <ion-row>
             <ion-col col-auto>
-              <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
-              
-              <!--
-              <label>FECHA REPORTE:</label>-
-              -->
-
+              <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>   
+              <!--<label>FECHA REPORTE:</label>-->
             </ion-col>
             <ion-col>
               <label><ion-badge>{{ orden.dhoraini }}</ion-badge></label>
@@ -76,11 +67,128 @@
           </ion-row>
         </ion-item>
       </ion-card>
-    </ion-item>
-    
-    <!--
-    	<ion-list-header>Hoy</ion-list-header>
-   	-->
+    </div>
+
+    <ion-item *ngIf="dislpayProceso">EN PROCESO</ion-item>
+    <div *ngFor="let orden of proceso" style="background-color: #abffff; padding: 8px 6%;">
+      <ion-card (click)="itemTapped($event, orden)" style="padding-left: 2%; padding-right: 2%;">
+        <ion-card-content style="padding: 0 !important;" >
+          <ion-card-title>
+            <ion-row style="border-bottom: 1px solid black;">
+              <ion-col col-6>
+                <label>FOLIO</label>
+                <p>{{ orden.nidorden }}</p>
+              </ion-col>
+              <ion-col col-6>
+                <label>DEPOSITO</label>
+                <p text-wrap>{{ orden.cdeposito }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-title>
+          <ion-row>
+            <ion-col col-auto>
+              <ion-icon ios="ios-build" md="md-build"></ion-icon>
+              <label>FALLA:</label>
+            </ion-col>
+            <ion-col text-wrap class="text-row">
+              {{ orden.cfalla }}
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+        <ion-item>
+          <ion-row>
+            <ion-col col-auto>
+              <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>   
+              <!--<label>FECHA REPORTE:</label>-->
+            </ion-col>
+            <ion-col>
+              <label><ion-badge>{{ orden.dhoraini }}</ion-badge></label>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-card>
+    </div>
+
+    <ion-item *ngIf="dislpayTramite">EN TRAMITE</ion-item>
+    <div *ngFor="let orden of tramite" style="background-color: #abffff; padding: 8px 6%;">
+      <ion-card (click)="itemTapped($event, orden)" style="padding-left: 2%; padding-right: 2%;">
+        <ion-card-content style="padding: 0 !important;" >
+          <ion-card-title>
+            <ion-row style="border-bottom: 1px solid black;">
+              <ion-col col-6>
+                <label>FOLIO</label>
+                <p>{{ orden.nidorden }}</p>
+              </ion-col>
+              <ion-col col-6>
+                <label>DEPOSITO</label>
+                <p text-wrap>{{ orden.cdeposito }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-title>
+          <ion-row>
+            <ion-col col-auto>
+              <ion-icon ios="ios-build" md="md-build"></ion-icon>
+              <label>FALLA:</label>
+            </ion-col>
+            <ion-col text-wrap class="text-row">
+              {{ orden.cfalla }}
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+        <ion-item>
+          <ion-row>
+            <ion-col col-auto>
+              <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>   
+              <!--<label>FECHA REPORTE:</label>-->
+            </ion-col>
+            <ion-col>
+              <label><ion-badge>{{ orden.dhoraini }}</ion-badge></label>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-card>
+    </div>
+
+    <ion-item *ngIf="dislpayCerrado">CERRADAS</ion-item>
+    <div *ngFor="let orden of cerrado" style="background-color: #abffff; padding: 8px 6%;">
+      <ion-card (click)="itemTapped($event, orden)" style="padding-left: 2%; padding-right: 2%;">
+        <ion-card-content style="padding: 0 !important;" >
+          <ion-card-title>
+            <ion-row style="border-bottom: 1px solid black;">
+              <ion-col col-6>
+                <label>FOLIO</label>
+                <p>{{ orden.nidorden }}</p>
+              </ion-col>
+              <ion-col col-6>
+                <label>DEPOSITO</label>
+                <p text-wrap>{{ orden.cdeposito }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-card-title>
+          <ion-row>
+            <ion-col col-auto>
+              <ion-icon ios="ios-build" md="md-build"></ion-icon>
+              <label>FALLA:</label>
+            </ion-col>
+            <ion-col text-wrap class="text-row">
+              {{ orden.cfalla }}
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+        <ion-item>
+          <ion-row>
+            <ion-col col-auto>
+              <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>   
+              <!--<label>FECHA REPORTE:</label>-->
+            </ion-col>
+            <ion-col>
+              <label><ion-badge>{{ orden.dhoraini }}</ion-badge></label>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-card>
+    </div>
+
 
   </ion-list>
 </ion-content>

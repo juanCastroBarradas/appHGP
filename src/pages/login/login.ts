@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, ToastController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ApiProvider } from '../../providers/api/api';
-import { OrdenesPage } from '../ordenes/ordenes';
+import { HomePage } from '../home/home';
 
 @Component({
   selector: 'page-login',
@@ -41,7 +41,7 @@ export class LoginPage {
 		      			//bandera que nos permite saber cada vez que abramos la app si esta logeado el usuario
 		      			this.storage.set('isLoginStorage', true);
 		      			this.storage.set('dataUser', data.arrReults);
-		      			this.navCtrl.setRoot(OrdenesPage);
+		      			this.navCtrl.setRoot(HomePage);
 		      		}else{
 		      			let toast = this.toastCtrl.create({
 							message: 'Error: '+data.arrReults,
@@ -50,6 +50,7 @@ export class LoginPage {
 						toast.present();
 		      		}
 		    	}, err => {
+		    		loading.dismiss();
 		        	console.error('ERROR', err);
 					let toast = this.toastCtrl.create({
 						message: 'Error Access: Servidor inaccesible. no hay acceso a internet',

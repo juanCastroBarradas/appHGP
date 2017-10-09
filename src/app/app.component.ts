@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Storage } from '@ionic/storage';
 
 import { LoginPage } from '../pages/login/login';
-import { OrdenesPage } from '../pages/ordenes/ordenes';
+import { HomePage } from '../pages/home/home';
 @Component({
   templateUrl: 'app.html'
 })
@@ -21,7 +21,7 @@ export class MyApp {
 
       this.storage.get('isLoginStorage').then((val) => {
         let login = (val != null)? val : false;
-        this.rootPage = (login)? OrdenesPage : LoginPage;
+        this.rootPage = (login)? HomePage : LoginPage;
       });
 
     });

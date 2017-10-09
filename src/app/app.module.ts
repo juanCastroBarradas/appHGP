@@ -8,9 +8,13 @@ import { HttpModule } from '@angular/http';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 import { MyApp } from './app.component';
+import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { OrdenesPage } from '../pages/ordenes/ordenes';
 import { DetalleOrdenPage } from '../pages/detalle-orden/detalle-orden';
+import { OrdenTramitePage } from '../pages/orden-tramite/orden-tramite';
+import { OrdenProcesoPage } from '../pages/orden-proceso/orden-proceso';
+import { OrdenPendientePage } from '../pages/orden-pendiente/orden-pendiente';
 import { PopoverObservacionPage } from '../pages/popover-observacion/popover-observacion';
 import { PopoverEventosPage } from '../pages/popover-eventos/popover-eventos';
 import { UserPage } from '../pages/user/user';
@@ -20,9 +24,13 @@ import { ApiProvider } from '../providers/api/api';
   declarations: [
     MyApp,
     UserPage,
+    HomePage,
     LoginPage,
     OrdenesPage,
     DetalleOrdenPage,
+    OrdenTramitePage,
+    OrdenProcesoPage,
+    OrdenPendientePage,
     PopoverEventosPage,
     PopoverObservacionPage
   ],
@@ -36,9 +44,13 @@ import { ApiProvider } from '../providers/api/api';
   entryComponents: [
     MyApp,
     UserPage,
+    HomePage,
     LoginPage,
     OrdenesPage,
     DetalleOrdenPage,
+    OrdenTramitePage,
+    OrdenProcesoPage,
+    OrdenPendientePage,
     PopoverEventosPage,
     PopoverObservacionPage
   ],

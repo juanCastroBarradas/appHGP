@@ -1,0 +1,40 @@
+
+<ion-header>
+  <ion-toolbar color="primary" *ngIf="!doSearch">
+    <ion-title>Ordenes de servicio</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="showSearch()">
+        <ion-icon ios="ios-search" md="md-search"></ion-icon>
+      </button>
+      <button ion-button icon-only color="royal" (click)="modalUserShow()">
+        <ion-icon ios="ios-contact" md="md-contact"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar color="primary" *ngIf="doSearch">
+    <ion-item>
+      <ion-input placeholder="Buscar" clearInput [(ngModel)]="filtro"></ion-input>
+    </ion-item>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="modalShowBusqueda()">
+        <ion-icon ios="ios-search" md="md-search"></ion-icon>
+      </button>
+      <button ion-button icon-only color="royal" (click)="showSearch()">
+        <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+
+  <ion-tabs class="tabs-basic" color="primary">
+      <ion-tab tabTitle="Pendientes" [root]="ordenPendiente"></ion-tab>
+      <ion-tab tabTitle="En Proceso" [root]="ordenProceso"></ion-tab>
+      <ion-tab tabTitle="En Tramite" [root]="ordenTramite"></ion-tab>
+    </ion-tabs>
+
+</ion-content>

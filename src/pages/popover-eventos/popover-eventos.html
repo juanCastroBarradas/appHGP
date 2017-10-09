@@ -13,7 +13,7 @@
 
 <ion-list class="popover-page" no-lines>
 
-    	<ion-item *ngFor="let evento of eventos">
+    	<div *ngFor="let evento of eventos" style="margin: 5% 3%;">
     		<ion-card>
     			<ion-card-content style="padding: 0 !important;" *ngIf="evento.nidevent != -1">
 		    		<ion-grid class="gridOrdenes">
@@ -74,5 +74,5 @@
 
 
     		</ion-card>
-    	</ion-item>
+    	</div>
   </ion-list>

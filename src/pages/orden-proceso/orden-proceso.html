@@ -1,0 +1,48 @@
+
+<ion-content style="background-color: #abffff;">
+	<ion-refresher (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content pullingIcon="arrow-dropdown" pullingText="" refreshingSpinner="circles" refreshingText=""></ion-refresher-content>
+	</ion-refresher>
+  <!--<ion-searchbar placeholder="Filter Items with Cancel" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>-->
+  
+	<ion-list no-lines style="margin: 0px !important;">
+	    <div *ngFor="let orden of ordenes" style="background-color: #abffff; padding: 8px 6%;">
+	      <ion-card (click)="itemTapped($event, orden)" style="padding-left: 2%; padding-right: 2%;">
+	        <ion-card-content style="padding: 0 !important;" >
+	          <ion-card-title>
+	            <ion-row style="border-bottom: 1px solid black; background-color: #f5f51f;">
+	              <ion-col col-6>
+	                <label>{{ orden.nidorden }}</label>
+	              </ion-col>
+	              <ion-col col-6>
+	                <label text-wrap>{{ orden.cdeposito }}</label>
+	              </ion-col>
+	            </ion-row>
+	          </ion-card-title>
+	          <ion-row>
+	            <ion-col col-auto>
+	              <ion-icon ios="ios-build" md="md-build"></ion-icon>
+	              <label>FALLA:</label>
+	            </ion-col>
+	            <ion-col text-wrap class="text-row">
+	              {{ orden.cfalla }}
+	            </ion-col>
+	          </ion-row>
+	        </ion-card-content>
+	        <ion-item>
+	          <ion-row>
+	            <ion-col col-auto>
+	              <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>   
+	              <!--<label>FECHA REPORTE:</label>-->
+	            </ion-col>
+	            <ion-col>
+	              <label><ion-badge>{{ orden.dhoraini }}</ion-badge></label>
+	            </ion-col>
+	          </ion-row>
+	        </ion-item>
+	      </ion-card>
+	    </div>
+    </ion-list>
+
+</ion-content>
+
