@@ -65,7 +65,7 @@ export class PopoverObservacionPage {
 							 position: 'bottom'
 						});
 						toast.present();
-						this.close();
+						this.close(true);
 						this.estatusOrden = cstatus;
 					},
 					error =>{
@@ -86,8 +86,9 @@ export class PopoverObservacionPage {
 
 	}
 
-	close() {
-		this.viewCtrl.dismiss(this.estatusOrden);
+	close(modifica : boolean) {
+		let data = { estatus : this.estatusOrden, modifica: modifica }
+		this.viewCtrl.dismiss(data);
 	}
 
 }

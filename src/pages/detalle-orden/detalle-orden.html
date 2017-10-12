@@ -87,7 +87,7 @@
     <ion-fab right bottom>
       <button ion-fab color="vibrant"><ion-icon name="add"></ion-icon></button>
       <ion-fab-list side="top">
-        <button ion-fab (click)="presentPopover($event)"><ion-icon ios="ios-send" md="md-send"></ion-icon></button>
+        <button ion-fab (click)="presentPopover($event)" *ngIf="showObservacion"><ion-icon ios="ios-send" md="md-send"></ion-icon></button>
         <button ion-fab (click)="popoverEventosShow($event)"><ion-icon ios="ios-chatboxes" md="md-chatboxes"></ion-icon></button>
       </ion-fab-list>
     </ion-fab>

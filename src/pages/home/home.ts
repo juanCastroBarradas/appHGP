@@ -46,6 +46,7 @@ export class HomePage {
 
   showSearch(){
     this.doSearch = (this.doSearch == true)? false : true;
+    //this.myInput.setFocus();
   }
 
 }

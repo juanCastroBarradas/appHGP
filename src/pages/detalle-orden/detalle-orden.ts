@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, PopoverController, LoadingController, ViewController } from 'ionic-angular';
 import { PopoverObservacionPage } from '../popover-observacion/popover-observacion';
 import { PopoverEventosPage } from '../popover-eventos/popover-eventos';
+import { HomePage } from '../home/home';
 import { ApiProvider } from '../../providers/api/api';
 
 @Component({
@@ -11,10 +12,12 @@ import { ApiProvider } from '../../providers/api/api';
 export class DetalleOrdenPage {
 	selectedItem: any;
 	loading : any;
+	showObservacion : boolean;
 
 	constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
 				public popoverCtrl: PopoverController, public loadingCtrl: LoadingController, public api : ApiProvider) {
 		this.selectedItem = navParams.get('item');
+		this.showObservacion = (this.selectedItem.cestatus == 'CERRADO') ? false : true;
 	}
 
 	ngOnInit(){
@@ -39,9 +42,11 @@ export class DetalleOrdenPage {
 		popover.present({
 		});
 		popover.onDidDismiss((popoverData) => {
-			this.selectedItem.cestatus = popoverData;
-			//this.dismiss();
-			//this.navCtrl.setRoot(HomePage);
+			this.selectedItem.cestatus = popoverData.estatus;
+			if(popoverData.modifica){
+				this.dismiss();
+				this.navCtrl.setRoot(HomePage);
+			}
 		});
 	}
 
