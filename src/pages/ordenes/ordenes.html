@@ -18,15 +18,15 @@
   <!--<ion-searchbar placeholder="Filter Items with Cancel" showCancelButton color="danger" (ionInput)="filterItems($event)"></ion-searchbar>-->
   
   <div style="margin: 1% 5%; padding: 5px; border-radius: 8px; background-color: white;">
-          <ion-row>
-            <ion-col col-auto>
-              <label>Resultados de:</label>
-            </ion-col>
-            <ion-col text-wrap class="text-row">
-              <ion-badge text-wrap>{{ filtro }}</ion-badge>
-            </ion-col>
-          </ion-row>
-        </div>
+    <ion-row>
+      <ion-col col-auto>
+        <label>Resultados de:</label>
+      </ion-col>
+      <ion-col text-wrap class="text-row">
+        <ion-badge text-wrap>{{ filtro }}</ion-badge>
+      </ion-col>
+    </ion-row>
+  </div>
 
   <ion-list no-lines style="margin: 0px !important;">
     <ion-item *ngIf="dislpayPendiente">PENDIENTE</ion-item>
