@@ -94,8 +94,7 @@
         <ion-item>
           <ion-row>
             <ion-col col-auto>
-              <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>   
-              <!--<label>FECHA REPORTE:</label>-->
+              <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>
             </ion-col>
             <ion-col>
               <label><ion-badge>{{ orden.dhoraini }}</ion-badge></label>
@@ -133,7 +132,6 @@
           <ion-row>
             <ion-col col-auto>
               <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>   
-              <!--<label>FECHA REPORTE:</label>-->
             </ion-col>
             <ion-col>
               <label><ion-badge>{{ orden.dhoraini }}</ion-badge></label>
@@ -170,14 +168,25 @@
         <ion-item>
           <ion-row>
             <ion-col col-auto>
-              <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>   
-              <!--<label>FECHA REPORTE:</label>-->
+              <ion-icon ios="ios-calendar" md="md-calendar"></ion-icon>  
             </ion-col>
             <ion-col>
               <label><ion-badge>{{ orden.dhoraini }}</ion-badge></label>
             </ion-col>
           </ion-row>
         </ion-item>
+      </ion-card>
+    </div>
+
+    <div style="background-color: #abffff; padding: 8px 6%;" *ngIf="!dislpayCerrado && !dislpayTramite && !dislpayProceso && !dislpayPendiente">
+      <ion-card style="padding-left: 2%; padding-right: 2%;">
+        <ion-card-content style="padding: 0 !important;">
+          <ion-row>
+            <ion-col>
+              <p text-wrap>No hay ordenes que coincidan con la busqueda..</p>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
       </ion-card>
     </div>
 

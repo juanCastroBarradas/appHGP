@@ -11,6 +11,7 @@ import { ApiProvider } from '../../providers/api/api';
 export class OrdenesPage {
 	filtro : any;
 	pendientes : any[];
+	ordenesFiltro : any[];
 	tramite : any[];
 	proceso : any[];
 	cerrado : any[];
@@ -51,7 +52,7 @@ export class OrdenesPage {
 		let seq = this.api.get('ordenes/consultar/all/filtro/'+this.filtro);
 		seq.map(res => res.json())
 		    	.subscribe(data => {
-		    		console.log(data);
+		    		this.ordenesFiltro = data.arrReults;
 		      		this.pendientes = data.arrReults.pendiente;
 		      		this.dislpayPendiente = (data.arrReults.pendiente.length > 0)? true : false;
 

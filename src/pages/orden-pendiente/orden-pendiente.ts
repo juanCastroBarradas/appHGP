@@ -23,7 +23,7 @@ export class OrdenPendientePage {
 		let cestatus = 'PENDIENTE';
 		let loading = this.loadingCtrl.create({
 	    	spinner: 'bubbles',
-      		content: 'Cargando eventos de la orden.'
+      		content: 'Cargando ordenes de servicio.'
 		});		
 		loading.present();
 		/*empleamos el uso del provider Api para realizar la peticiones http
