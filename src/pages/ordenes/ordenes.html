@@ -1,11 +1,17 @@
 
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title></ion-title>
-    <ion-buttons start>
-      <button ion-button (click)="dismiss()">
-        <span ion-text>Cerrar</span> 
-        <!--<ion-icon name="md-close" showWhen="android, windows"></ion-icon>-->
+    <form [formGroup]="myForm" (ngSubmit)="doSearch()">
+      <ion-item>
+        <ion-input placeholder="Buscar" clearInput formControlName="filtro" class="searchOrdenes" #input></ion-input>
+      </ion-item>
+    </form>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" [disabled]="!myForm.valid" (click)="doSearch()">
+        <ion-icon ios="ios-search" md="md-search"></ion-icon>
+      </button>
+      <button ion-button icon-only color="royal" (click)="dismiss()">
+        <ion-icon ios="ios-close-circle" md="md-close-circle"></ion-icon>
       </button>
     </ion-buttons>
   </ion-toolbar>

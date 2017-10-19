@@ -11,17 +11,16 @@ import { UserPage } from '../user/user';
   templateUrl: 'home.html',
 })
 export class HomePage {
-  filtro : any;
 	ordenTramite : any;
 	ordenProceso : any;
 	ordenPendiente: any;
-  doSearch : boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, 
+              public navParams: NavParams, 
+              public modalCtrl: ModalController) {
   	this.ordenTramite = OrdenTramitePage;
   	this.ordenProceso = OrdenProcesoPage;
   	this.ordenPendiente = OrdenPendientePage;
-    this.doSearch = false;
   }
 
   ionViewDidLoad() {
@@ -34,19 +33,9 @@ export class HomePage {
   }
 
   modalShowBusqueda() {
-    if(this.filtro != "" && this.filtro != null){
-      let contactModal = this.modalCtrl.create(OrdenesPage,{
-        filtro : this.filtro
-      });
-      contactModal.present();
-      this.filtro = "";
-      this.showSearch();
-    }
-  }
-
-  showSearch(){
-    this.doSearch = (this.doSearch == true)? false : true;
-    //this.myInput.setFocus();
+    let contactModal = this.modalCtrl.create(OrdenesPage,{
+    });
+    contactModal.present();
   }
 
 }

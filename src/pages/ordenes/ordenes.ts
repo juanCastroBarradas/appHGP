@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, ToastController, ModalController, ViewController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, ToastController, ViewController } from 'ionic-angular';
 import { DetalleOrdenPage } from '../detalle-orden/detalle-orden';
-import { UserPage } from '../user/user';
 import { ApiProvider } from '../../providers/api/api';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'page-ordenes',
   templateUrl: 'ordenes.html',
 })
 export class OrdenesPage {
+	myForm: FormGroup;
 	filtro : any;
 	pendientes : any[];
 	ordenesFiltro : any[];
@@ -21,29 +22,40 @@ export class OrdenesPage {
 	dislpayProceso: boolean;
 	
 
-	constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, public viewCtrl: ViewController,
-				public loadingCtrl: LoadingController, public toastCtrl: ToastController, public api : ApiProvider) {
-		this.filtro = navParams.get('filtro');
-		console.log(this.filtro);
-		this.cargaDatos();
+	constructor(public navCtrl: NavController, 
+				public navParams: NavParams, 
+				public viewCtrl: ViewController,
+				public loadingCtrl: LoadingController, 
+				public toastCtrl: ToastController, 
+				public api : ApiProvider,
+                public formBuilder: FormBuilder) {
 		this.dislpayCerrado = this.dislpayPendiente = this.dislpayProceso = this.dislpayProceso = false;
+    	this.myForm = this.createMyForm();
 	}
 
-
-	modalUserShow() {
-		let contactModal = this.modalCtrl.create(UserPage);
-   		contactModal.present();
+	private createMyForm(){
+	    return this.formBuilder.group({
+	      filtro: ['', Validators.required],
+	    });
 	}
+
 
 	doRefresh(refresher){
 		this.cargaDatos();	      
 		refresher.complete();
 	}
 
+	doSearch(){
+		this.filtro = this.myForm.value.filtro;
+		if(this.filtro != ""){
+			this.cargaDatos();
+		}
+	}
+
 	cargaDatos(){
 		let loading = this.loadingCtrl.create({
 	    	spinner: 'bubbles',
-      		content: 'Cargando ordenes de servicio.'
+      		content: 'Buscando ordenes de servicio.'
 		});		
 		loading.present();
 		/*empleamos el uso del provider Api para realizar la peticiones http
@@ -67,7 +79,7 @@ export class OrdenesPage {
 
 		      		loading.dismiss();
 		    	},err => {
-		        	console.error('ERROR', err);
+		        	console.error('ERROR ordenes:', err);
 		        	loading.dismiss();
 					let toast = this.toastCtrl.create({
 						message: 'Error Access: Servidor inaccesible. no hay acceso a internet',

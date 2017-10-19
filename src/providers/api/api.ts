@@ -34,7 +34,6 @@ export class ApiProvider {
     let options = new RequestOptions({ headers: headers });
     //build POST body
     let body = JSON.stringify(bodyPeticion);
-
     return this.http.post(this.url + '/' + endpoint, body, options);
   }
 
